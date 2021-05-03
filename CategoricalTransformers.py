@@ -14,6 +14,10 @@
 # https://huggingface.co/transformers/model_doc/bert.html
 # https://huggingface.co/transformers/model_doc/distilbert.html#tfdistilbertforsequenceclassification
 #
+# Additional reading on Transformers model
+# https://www.analyticsvidhya.com/blog/2019/09/demystifying-bert-groundbreaking-nlp-framework/
+# https://analyticsindiamag.com/how-to-use-bert-transformer-for-grammar-checking/
+# 
 
 import csv
 import matplotlib.pyplot as plt
