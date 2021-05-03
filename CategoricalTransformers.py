@@ -1,3 +1,20 @@
+# Primary work on implementing Transformers for ComSem was by Nate Kirsch
+# Original code and dataset comes from Thomas McKenzie's repo
+# https://github.com/tmckenzie2/ComsemNeuralNetwork/tree/9b1fd4db829b35bc6a3404f679d790306a1204e0/error-detection-neural-nets-master
+#
+# The code from Thomas's gihub was modified to try and use BERT, or in this case DistilBERT for Categorical analysis
+# with this article being the primary guide:
+# https://towardsdatascience.com/text-classification-with-hugging-face-transformers-in-tensorflow-2-without-tears-ee50e4f3e7ed
+# 
+# Additional potentially useful links:
+# Why Turn into a Pickle
+# https://towardsdatascience.com/why-turn-into-a-pickle-b45163007dac
+# 
+# HuggingFace Transformers docs
+# https://huggingface.co/transformers/model_doc/bert.html
+# https://huggingface.co/transformers/model_doc/distilbert.html#tfdistilbertforsequenceclassification
+#
+
 import csv
 import matplotlib.pyplot as plt
 import tensorflow as tf
@@ -8,7 +25,6 @@ from keras.models import Sequential
 from keras.layers import Dense, GRU, Embedding, Flatten
 from keras.optimizers import Adam
 
-# from tensorflow.python.keras.utils import to_categorical
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 from keras import backend as K
@@ -53,6 +69,9 @@ val = t.preprocess_test(x_test_text, y_test_targ)
 
 model = t.get_classifier()
 learner = ktrain.get_learner(model, train_data=trn, val_data=val, batch_size=6)
+# Everything up to this point works, meaning the data correctly gets pre-processed
+# Below, the data fails to properly get processed due to "logits" and "labels"
+# Not sure what about the data is causing it to fault.
 learner.fit_onecycle(5e-5, 4)
 learner.validate(class_names=t.get_classes())
 
